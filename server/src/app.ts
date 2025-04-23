@@ -1,6 +1,5 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import { createServer } from 'node:http';
-import { join } from 'node:path';
 import { Server, Socket } from 'socket.io';
 import cors from 'cors';
 
