@@ -1,0 +1,22 @@
+.message {
+    background-color: #f2f2f2;
+    border-radius: 12px;
+    padding: 16px;
+    margin-top: 20px;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .message p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .message strong {
+    color: #555;
+  }
+  
