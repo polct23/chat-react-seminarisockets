@@ -1,0 +1,75 @@
+/* Chat.css - Estilo adaptado, alegre y en tonos azules */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #dbeafe 0%, #93c5fd 100%);
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.chat-header {
+    background-color: #3b82f6;
+    padding: 1rem;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.messages-container {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    padding: 1rem;
+    overflow-y: auto; /* Habilita el scroll si hay muchos mensajes */
+    background-color: #f0f9ff;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: space-between; /* Distribuye los elementos horizontalmente */
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: #e0f2fe;
+    border-top: 2px solid #60a5fa;
+    position: fixed; /* Fija la barra de entrada */
+    bottom: 0; /* Posición en la parte inferior */
+    width: 100%; /* Asegura que ocupe todo el ancho */
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1); /* Sombra para separar del contenido */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.chat-input input {
+    flex: 1; /* Ocupa todo el espacio disponible */
+    padding: 0.75rem;
+    border: 1px solid #93c5fd;
+    border-radius: 20px;
+    font-size: 1rem;
+    outline: none;
+    min-width: 0; /* Evita que el input crezca más de lo necesario */
+}
+
+.chat-input button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 20px;
+    background-color: #3b82f6;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    flex-shrink: 0; /* Evita que los botones se reduzcan */
+}
+
+.chat-input button:hover {
+    background-color: #2563eb;
+}
