@@ -2,6 +2,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Chat.css';
 import { io, Socket } from 'socket.io-client';
+import { useLocation } from 'react-router-dom';
+import { User } from '../../types/types';
 
 interface ChatMessage {
   room: string;
@@ -11,7 +13,8 @@ interface ChatMessage {
 }
 
 const Chat: React.FC = () => {
-  const [username, setUsername] = useState('');
+  const location = useLocation();
+  const user = location.state?.user as User; // Accede al usuario pasado por navigate
   const [room, setRoom] = useState('sala1');
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState<ChatMessage[]>([]);
@@ -52,8 +55,8 @@ const Chat: React.FC = () => {
     }
   }, [messageList]);
 
-  const joinRoom = () => {
-    if (username && room) {
+  const joinRoom = () => {    
+    if (room) {
       socketRef.current?.emit('join_room', room);
       setShowChat(true);
     }
@@ -63,7 +66,7 @@ const Chat: React.FC = () => {
     if (currentMessage !== '') {
       const messageData: ChatMessage = {
         room,
-        author: username,
+        author: user.name,
         message: currentMessage,
         time: new Date().toLocaleTimeString(),
       };
@@ -78,13 +81,7 @@ const Chat: React.FC = () => {
     <div className="chat-container">
       {!showChat ? (
         <div className="join-chat">
-          <h2>Unirse al Chat</h2>
-          <input
-            type="text"
-            placeholder="Nombre de usuario..."
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+          <h2>Bienvenid@ al Chat {user.name}</h2>
           <input
             type="text"
             placeholder="Sala..."
@@ -100,7 +97,7 @@ const Chat: React.FC = () => {
             {messageList.map((msg, index) => (
               <div
                 key={index}
-                className={`message ${msg.author === username ? 'own' : 'other'}`}
+                className={`message ${msg.author === user.name ? 'own' : 'other'}`}
               >
                 <div className="bubble">
                   <p>{msg.message}</p>

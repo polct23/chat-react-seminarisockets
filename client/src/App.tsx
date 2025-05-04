@@ -29,10 +29,10 @@ function App() {
 
   const divRef = useRef<HTMLDivElement>(null); // Mantenemos el useRef como ejemplo
   useEffect(() => {
-    if (isLoggedIn) {
-      navigate('/chat'); // Navega a la página de chat cuando el usuario inicie sesión
+    if (isLoggedIn) {    
+      navigate('/chat', {state: {user: currentUser}}); // Navega a la página de chat cuando el usuario inicie sesión
     }
-}, [isLoggedIn, navigate]); 
+}, [isLoggedIn, navigate, currentUser]); 
 
 
 const handleLogin = async (email: string, password: string) => {
@@ -76,3 +76,4 @@ const handleLogin = async (email: string, password: string) => {
 }
 
 export default App;
+
