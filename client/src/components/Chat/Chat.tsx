@@ -4,6 +4,8 @@ import './Chat.css';
 import { io, Socket } from 'socket.io-client';
 import { useLocation } from 'react-router-dom';
 import { User } from '../../types/types';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface ChatMessage {
   room: string;
@@ -32,6 +34,9 @@ const Chat: React.FC = () => {
       },
     });
 
+    // Emitir evento new_user al conectar
+    socketRef.current.emit('new_user', user.name);
+
     socketRef.current.on('receive_message', (data: ChatMessage) => {
       console.log('Mensaje recibido:', data);
       setMessageList(prev => [...prev, data]);
@@ -44,10 +49,15 @@ const Chat: React.FC = () => {
       }
     });
 
+    // Escuchar user_connected y mostrar toast
+    socketRef.current.on('user_connected', (data: { userId: string; username: string }) => {
+      toast.info(`${data.username} se ha conectado al chat`);
+    });
+
     return () => {
       socketRef.current?.disconnect();
     };
-  }, []);
+  }, [user.name]);
 
   useEffect(() => {
     if (chatBodyRef.current) {
@@ -79,6 +89,7 @@ const Chat: React.FC = () => {
 
   return (
     <div className="chat-container">
+      <ToastContainer position="top-right" autoClose={3000} />
       {!showChat ? (
         <div className="join-chat">
           <h2>Bienvenid@ al Chat {user.name}</h2>
